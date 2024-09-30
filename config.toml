@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://vosen.github.io/zluda"
+base_url = "https://vosen.github.io/ZLUDA"
 title = "ZLUDA"
 
 # Whether to automatically compile all Sass files in the sass directory
