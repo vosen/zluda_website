@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+ZLUDA updates
+</h1>
+{% set blog = get_section(path="blog/_index.md") %}
+{% for post in blog.pages %}
+  {{ post.date | date }} <a href="{{ post.permalink }}">{{post.title}}</a>
+{% endfor %}
+{% endblock content %}
