@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
+  <!-- Courtesy of https://github.com/LeoColomb/perfectmotherfuckingwebsite -->
   <style>
-  
     body {
       max-width: 650px;
       margin: 40px auto;
@@ -34,12 +34,19 @@
     }
   </style>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ config.title }}{% if page.title %} - {{ page.title }}{% endif %}</title>
 </head>
 
 <body>
   <section class="section">
     <div class="container">
+    <h1>
+      <a style="color: #0d1117 !important; text-decoration:none;" href="{{ get_url(path='/') }}">ZLUDA</a>
+      <div style="float: right;">
+        <a href="https://github.com/vosen/ZLUDA"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://discord.gg/sg6BNzXuc7"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/></a>
+      </div>
+    </h1>
       {% block content %} {% endblock %}
     </div>
   </section>
