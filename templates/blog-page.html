@@ -3,8 +3,8 @@
 {% block content %}
 <h2 class="title">
   {{ page.title }}
+  <small><div>{{ page.date }}</div></small>
 </h2>
-<p class="subtitle"><strong>{{ page.date }}</strong></p>
 {{ page.content | safe }}
 
 <script src="https://giscus.app/client.js"

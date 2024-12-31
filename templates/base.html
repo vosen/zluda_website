@@ -18,6 +18,11 @@
       line-height: 1.2;
     }
 
+    h1 small, h2 small {
+      font-size:16px;
+      font-weight:normal;
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         color: #c9d1d9;
@@ -42,10 +47,15 @@
   <section class="section">
     <div class="container">
     <h1>
-      <a style="color: #0d1117 !important; text-decoration:none;" href="{{ get_url(path='/') }}">ZLUDA</a>
-      <div style="float: right;">
-        <a href="https://github.com/vosen/ZLUDA"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://discord.gg/sg6BNzXuc7"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/></a>
+      <div>
+        <a style="color: #0d1117 !important; text-decoration:none;" href="{{ get_url(path='/') }}">ZLUDA</a>
+        <div style="float: right;">
+          <a href="https://github.com/vosen/ZLUDA"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://discord.gg/sg6BNzXuc7"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/></a>
+        </div>
       </div>
+      <small>
+        <p style="margin-top: 0.25em">ZLUDA allows to run unmodified CUDA applications on non-NVIDIA GPUs</p>
+      </small>
     </h1>
       {% block content %} {% endblock %}
     </div>
