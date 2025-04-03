@@ -3,7 +3,7 @@ title = "ZLUDA update Q1 2025 - roadmap update, LLVM tests, denormals"
 date = 2025-04-03
 +++
 
-Welcome to the new ZLUDA update. Read about our plans for the nearest future (that include PyTorch and PhysX) in [Roadmap update](#roadmap-update) and about progress made this quarter in [LLVM bitcode unit tests](#llvm-bitcode-unit-tests) and "Correct rounding and denormal modes on AMD GPUs".
+Welcome to the new ZLUDA update. Read about our plans for the nearest future (that include PyTorch and PhysX) in [Roadmap update](#roadmap-update) and about progress made this quarter in [LLVM bitcode unit tests](#llvm-bitcode-unit-tests) and [Correct rounding and denormal modes on AMD GPUs](#correct-rounding-and-denormal-modes-on-amd-gpus).
 
 ### Roadmap update
 
