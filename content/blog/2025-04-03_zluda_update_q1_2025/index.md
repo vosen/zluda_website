@@ -1,5 +1,5 @@
 +++
-title = "ZLUDA update Q1 2025"
+title = "ZLUDA update Q1 2025 - roadmap update, LLVM tests, denormals"
 date = 2025-04-03
 +++
 
