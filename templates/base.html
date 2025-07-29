@@ -56,6 +56,7 @@
       text-align: center;
       vertical-align: top;
       user-select: none;
+      width: 3rem;
     }
     pre mark {
       /* If you want your highlights to take the full width */
@@ -66,6 +67,13 @@
     pre table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
+    }
+    pre .line.prompt::before {
+      content: "$ ";
+    }
+    pre code[data-lang="bash"]:not(.no_wrap) {
+      text-wrap: auto;
     }
   </style>
   <meta charset="utf-8">
@@ -90,6 +98,38 @@
       {% block content %} {% endblock %}
     </div>
   </section>
+  <script>
+    for (const snippet of document.querySelectorAll('pre code[data-lang="bash"]')) {
+      let lineNodes = [];
+      let prompt = true;
+      for (const span of snippet.querySelectorAll('span')) {
+        if (span.textContent.startsWith('#no_wrap')) {
+          snippet.classList.add('no_wrap');
+          snippet.removeChild(span);
+          continue;
+        }
+        lineNodes.push(span);
+        if (lineNodes.length === 1 && span.textContent.startsWith('# ')) {
+          prompt = false;
+        }
+        if (span.textContent.endsWith('\n')) {
+          const lineDiv = document.createElement('div');
+          lineDiv.classList.add('line');
+          if (prompt) {
+            lineDiv.classList.add('prompt');
+          }
+          snippet.insertBefore(lineDiv, lineNodes[0]);
+
+          for (const line of lineNodes) {
+            lineDiv.appendChild(line);
+          }
+
+          lineNodes = [];
+          prompt = true;
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>
