@@ -8,6 +8,18 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: checkout ZLUDA
+        uses: actions/checkout@v4
+        with:
+          repository: 'vosen/ZLUDA'
+          path: 'ZLUDA'
+      - name: build Rust docs
+        run: cargo doc --no-deps --workspace --document-private-items
+        working-directory: ./ZLUDA
+      - name: copy Rust docs into static directory
+        run: |
+          mkdir -p static/contribute
+          mv ZLUDA/target/doc static/contribute/docs
       - name: build_and_deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
