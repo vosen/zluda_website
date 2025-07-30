@@ -14,7 +14,7 @@ jobs:
           repository: 'vosen/ZLUDA'
           path: 'ZLUDA'
       - name: build Rust docs
-        run: cargo doc --no-deps --workspace --document-private-items
+        run: cargo doc --no-deps --workspace
         working-directory: ./ZLUDA
       - name: copy Rust docs into static directory
         run: |
