@@ -1,12 +1,12 @@
 +++
-title = "Using zluda_dump"
+title = "Using zluda_trace"
 +++
 
-zluda_dump is a [shim](https://en.wikipedia.org/wiki/Shim_(computing))
+zluda_trace is a [shim](https://en.wikipedia.org/wiki/Shim_(computing))
 for the CUDA API which traces CUDA driver and performance library
 function calls. The first step in getting an application running with
 ZLUDA is to discover how it is using CUDA, and you can do this by using
-zluda_dump.
+zluda_trace.
 
 ## Quick Start
 
@@ -17,13 +17,13 @@ Run your application like this:
 #### AMD GPU:
 
 ```bash
-ZLUDA_CUDA_LIB=<ZLUDA_DIRECTORY>/libcuda.so LD_LIBRARY_PATH=<ZLUDA_DIRECTORY>/dump/ ZLUDA_DUMP_DIR=<LOG_DIRECTORY> <APPLICATION> <APPLICATION_ARGUMENTS>
+ZLUDA_CUDA_LIB=<ZLUDA_DIRECTORY>/libcuda.so LD_LIBRARY_PATH=<ZLUDA_DIRECTORY>/trace/ ZLUDA_LOG_DIR=<LOG_DIRECTORY> <APPLICATION> <APPLICATION_ARGUMENTS>
 ```
 
 #### NVIDIA GPU:
 
 ```bash
-LD_LIBRARY_PATH=<ZLUDA_DIRECTORY>/dump/ ZLUDA_DUMP_DIR=<LOG_DIRECTORY> <APPLICATION> <APPLICATION_ARGUMENTS>
+LD_LIBRARY_PATH=<ZLUDA_DIRECTORY>/trace/ ZLUDA_LOG_DIR=<LOG_DIRECTORY> <APPLICATION> <APPLICATION_ARGUMENTS>
 ```
 
 If you're [filing a GitHub
@@ -42,15 +42,15 @@ Run your application like this:
 
 ```bash
 export ZLUDA_CUDA_LIB=<ZLUDA_DIRECTORY>/nvcuda.dll
-export ZLUDA_DUMP_DIR=<LOG_DIRECTORY>
-zluda_with.exe --nvcuda <ZLUDA_DIRECTORY>/zluda_dump.dll -- <APPLICATION> <APPLICATION_ARGUMENTS>
+export ZLUDA_TRACE_DIR=<LOG_DIRECTORY>
+zluda_with.exe --nvcuda <ZLUDA_DIRECTORY>/zluda_trace.dll -- <APPLICATION> <APPLICATION_ARGUMENTS>
 ```
 
 #### NVIDIA GPU:
 
 ```bash
-export ZLUDA_DUMP_DIR=<LOG_DIRECTORY>
-zluda_with.exe --nvcuda <ZLUDA_DIRECTORY>/zluda_dump.dll -- <APPLICATION> <APPLICATION_ARGUMENTS>
+export ZLUDA_TRACE_DIR=<LOG_DIRECTORY>
+zluda_with.exe --nvcuda <ZLUDA_DIRECTORY>/zluda_trace.dll -- <APPLICATION> <APPLICATION_ARGUMENTS>
 ```
 
 If you're [filing a GitHub
@@ -62,12 +62,12 @@ Windows versions.
 
 ### Explanation
 
-#### `LD_LIBRARY_PATH=<ZLUDA_DIRECTORY>/dump/`
+#### `LD_LIBRARY_PATH=<ZLUDA_DIRECTORY>/trace/`
 
 `<ZLUDA_DIRECTORY>` is the directory that contains the ZLUDA-provided
 libcuda.so. It will be `target/release` if you built from source, or `zluda`
-if you downloaded one of the release packages. `<ZLUDA_DIRECTORY>/dump`
-contains zluda_dump's `libcuda.so`.
+if you downloaded one of the release packages. `<ZLUDA_DIRECTORY>/trace`
+contains zluda_trace's `libcuda.so`.
 
 TODO: info box
 
@@ -79,19 +79,19 @@ libraries instead of executables.
 
 #### `ZLUDA_CUDA_LIB=<ZLUDA_DIRECTORY>/libcuda.so`
 
-By default, zluda_dump will log all calls and then redirect them to
+By default, zluda_trace will log all calls and then redirect them to
 CUDA. In order to use ZLUDA instead, `ZLUDA_CUDA_LIB` must be set to the
 libcuda.so provided by ZLUDA.
 
-#### `ZLUDA_DUMP_DIR=<LOG_DIRECTORY>`
+#### `ZLUDA_TRACE_DIR=<LOG_DIRECTORY>`
 
-By default, zluda_dump prints logs to stderr. In order to save them to a
+By default, zluda_trace prints logs to stderr. In order to save them to a
 file, as well as save other useful information, you can provide a
 directory that they should be saved in – for example, `/tmp/zluda`.
 
-## Understanding the zluda_dump output
+## Understanding the zluda_trace output
 
-Let's look at the zluda_dump output for a simple application. Here's a
+Let's look at the zluda_trace output for a simple application. Here's a
 CUDA program that adds two numbers on the GPU:
 
 ```cpp,linenos
@@ -113,24 +113,24 @@ int main() {
 ```
 
 I've saved this file as `add.cu`. ZLUDA doesn't successfully run this
-application yet, so I'll compile it and run it using zluda_dump and CUDA
-in order to demonstrate all of zluda_dump's features.
+application yet, so I'll compile it and run it using zluda_trace and CUDA
+in order to demonstrate all of zluda_trace's features.
 
 ```bash
 nvcc add.cu -o add -arch sm_80
-LD_LIBRARY_PATH=~/ZLUDA/target/release/dump/ ZLUDA_DUMP_DIR=/tmp/zluda ./add
+LD_LIBRARY_PATH=~/ZLUDA/target/release/trace/ ZLUDA_TRACE_DIR=/tmp/zluda ./add
 ```
 
 The last few lines should look something like:
 
 ```
-[ZLUDA_DUMP] cuCtxSynchronize() -> CUDA_SUCCESS
+[ZLUDA_TRACE] cuCtxSynchronize() -> CUDA_SUCCESS
 result: 3
-[ZLUDA_DUMP] {CONTEXT_LOCAL_STORAGE_INTERFACE_V0301}::context_local_storage_get(value: 0x562c764a73c0, cu_ctx: 0x0, key: 0x562c764ba130) -> CUDA_SUCCESS
-[ZLUDA_DUMP] cuMemFree_v2(dptr: 0x7f3ca2000000) -> CUDA_SUCCESS
-[ZLUDA_DUMP] {CONTEXT_LOCAL_STORAGE_INTERFACE_V0301}::context_local_storage_delete(context: 0x562c764ba760, key: 0x562c764ba130) -> CUDA_ERROR_DEINITIALIZED
-[ZLUDA_DUMP] cuLibraryUnload(library: 0x562c773ffb10) -> CUDA_ERROR_DEINITIALIZED
-[ZLUDA_DUMP] cuDevicePrimaryCtxRelease(dev: 0) -> CUDA_ERROR_DEINITIALIZED
+[ZLUDA_TRACE] {CONTEXT_LOCAL_STORAGE_INTERFACE_V0301}::context_local_storage_get(value: 0x562c764a73c0, cu_ctx: 0x0, key: 0x562c764ba130) -> CUDA_SUCCESS
+[ZLUDA_TRACE] cuMemFree_v2(dptr: 0x7f3ca2000000) -> CUDA_SUCCESS
+[ZLUDA_TRACE] {CONTEXT_LOCAL_STORAGE_INTERFACE_V0301}::context_local_storage_delete(context: 0x562c764ba760, key: 0x562c764ba130) -> CUDA_ERROR_DEINITIALIZED
+[ZLUDA_TRACE] cuLibraryUnload(library: 0x562c773ffb10) -> CUDA_ERROR_DEINITIALIZED
+[ZLUDA_TRACE] cuDevicePrimaryCtxRelease(dev: 0) -> CUDA_ERROR_DEINITIALIZED
 ```
 
 Now, let's take a look at our log directory:
@@ -140,7 +140,7 @@ ls /tmp/zluda
 add
 ```
 
-zluda_dump creates a new directory for each run, based on the name of
+zluda_trace creates a new directory for each run, based on the name of
 the command. If the `add` directory already existed, it'd create an `add_1`
 directory, and so on. Next, let's look at that newly-created directory:
 
@@ -184,8 +184,8 @@ know are that these are from function pointer tables returned by
 `cuGetExportTable`.
 
 We're looking at a very simple example, so it doesn't use any
-performance libraries. If you use zluda_dump for code calling one of
-NVIDIA's performance libraries, zluda_dump will log both the call to
+performance libraries. If you use zluda_trace for code calling one of
+NVIDIA's performance libraries, zluda_trace will log both the call to
 that library, and then all of the calls made by that library call. That
 looks like:
 
@@ -244,8 +244,8 @@ As you can see, this is the add function from `add.cu`.
 
 ### Compiler logs
 
-There's one more kind of file zluda_dump might produce: a compiler error
-log file. When zluda_dump encounters a PTX module, it tries to compile
+There's one more kind of file zluda_trace might produce: a compiler error
+log file. When zluda_trace encounters a PTX module, it tries to compile
 it with ZLUDA's ptx compiler. Any errors produced will be saved into a
 `module_NNNN_NN.log` file. For example, it might look like
 
