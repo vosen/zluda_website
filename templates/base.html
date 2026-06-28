@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  {% block rss %}
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+  {% endblock %}
   <!-- Courtesy of https://github.com/LeoColomb/perfectmotherfuckingwebsite -->
   <style>
     body {
