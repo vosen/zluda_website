@@ -29,9 +29,9 @@ Various PhysX samples running on an AMD GPU:
 
 Even more interestingly, here's a screenshot from Mafia II (original 2010 version) built-in benchmark  running on an AMD GPU. All settings are maxed out and PhysX is enabled:
 
-[![ZLUDA OFF](zluda_off.small.jpg "ZLUDA OFF")](zluda_off.jpg) ZLUDA OFF (click to view the full screen)
+[![ZLUDA OFF](zluda_off.small.jpg "ZLUDA OFF")](zluda_off.jpg) **ZLUDA OFF** (click image to view the full screen)
 
-[![ZLUDA ON](zluda_on.small.jpg "ZLUDA ON")](zluda_on.jpg) ZLUDA ON (click to view the full screen)
+[![ZLUDA ON](zluda_on.small.jpg "ZLUDA ON")](zluda_on.jpg) **ZLUDA ON** (click image to view the full screen)
 
 Support is not yet complete: fluid simulations can be glitchy, and the current method of loading ZLUDA into Steam games is poor. I only tried it on my own PC, which has an unusual GPU setup. Nevertheless, if you are comfortable with editing the source code and building ZLUDA yourself, you can give it a try. For everyone else, I recommend watching the PR and waiting for it to be merged and included in the preview builds. Plese leave your feedback in the PR or on Discord.
 
