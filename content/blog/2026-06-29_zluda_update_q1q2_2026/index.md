@@ -6,7 +6,7 @@ date = 2026-06-29
 Hi, and welcome to the latest ZLUDA update! Since I skipped the last update, this special issue covers all the developments made in ZLUDA since the start of the year. We now have two new major workloads: PhysX ([PhysX pre-alpha](#physx-pre-alpha)) and Blender ([Textures support](#textures-support)). Much of this overlaps with [Much improved Windows support](#much-improved-windows-support). Additionally, there has been a steady stream of minor features and improvements to existing workloads ([Better ML support](#better-ml-support)). These culminated in a new major release ([Version 6](#version-6)). Some of you may also be interested in the [The new direction of the project](#the-new-direction-of-the-project).
 
 ### Version 6
-I am finally marking a new major release. As a remainder, ZLUDA follows a continuous development model. A major release does not represent addition of any particular single feature a compatibility break, but rather signals that significant progress has been made and that it is worth trying it out again. Version 6 is identical to the latest preview build (6-preview.79).
+I am finally marking a new major release. As a reminder, ZLUDA follows a continuous development model. A major release does not represent addition of any particular single feature a compatibility break, but rather signals that significant progress has been made and that it is worth trying it out again. Version 6 is identical to the latest preview build (6-preview.79).
 
 ### PhysX pre-alpha
 With PC component prices as high as they are, we're all being compelled to revisit gaming classics.  
